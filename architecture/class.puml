@@ -1,6 +1,53 @@
-@startuml Person 
-class Person {
+@startuml
+/' class User {
   name: string
-  age: number
+
+  conferences: [Conference]
+  calender: [Calender]
+  constructor(name: string, conferences: [Conference], calender: Calender)
+  createConference(name: string, location: string, date: number)
+  joinConference(conference: Conference)
+  leaveConference(conference: string)
+  createCalender(conference: [Conference], date: number)
+
+} '/
+
+class User {
+  name: string
+  conferences: [Conference]
+  calender: [Calender]
+  constructor(name: string, conferences: [Conference], calender: Calender)
+  createConference(name: string, location: string, date: number)
+  joinConference(conference: Conference)
+  leaveConference(conference: string)
+  createCalender(conference: [Conference], date: number)
+
 }
+
+class Conference {
+  name: string
+  location: string
+  date: number
+  attendees: [User]
+
+}
+
+class Calender {
+  conference: [Conference]
+  date: number
+}
+
+package Event{
+  class User{}
+  class Conference{}
+  class Calender{}
+}
+
+
+User "1" -----> "0..*" Conference :creates, joins
+Conference -----> "0..*" User : joined by
+Calender -----> "0..*" Conference : contains
+
+
+
 @enduml

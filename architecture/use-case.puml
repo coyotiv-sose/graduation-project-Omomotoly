@@ -1,0 +1,34 @@
+@startuml
+
+left to right direction
+
+
+actor "A ConferenceApp User" as user
+actor "An Attendee" as attendee
+
+package "Conference" {
+    usecase "Join conference" as UC2
+    usecase "Leave conference" as UC3
+}
+
+package "Calender" {
+    usecase "Create calender" as UC4
+    usecase "Add conference to calender" as UC5
+    usecase "Remove conference from calender" as UC6
+    usecase "Update calender" as UC7
+}
+
+user --> UC1
+user --> UC2
+user --> UC3
+user --> UC4
+user --> UC5
+attendee --> UC1
+attendee --> UC2
+attendee --> UC3
+attendee --> UC4
+attendee --> UC5
+attendee --> UC6
+
+
+@enduml
