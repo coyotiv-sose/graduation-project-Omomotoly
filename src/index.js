@@ -39,6 +39,10 @@ async function main() {
     name: 'Zainab',
   })
 
+  await axios.post('http://localhost:3000/users', {
+    name: 'Omotola',
+  })
+
   /* await axios.post('http://localhost:3000/users/Tobi/conferences', {
     name: 'TobiGoogleConference',
     location: 'Whispering Palms',
