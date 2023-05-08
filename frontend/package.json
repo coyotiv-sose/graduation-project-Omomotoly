@@ -15,12 +15,14 @@
     "pinia": "^2.0.32",
     "pug": "^3.0.2",
     "sass": "^1.62.0",
+    "socket.io-client": "^4.6.1",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.2.0",
     "@vitejs/plugin-vue": "^4.0.0",
+    "@volar/vue-language-plugin-pug": "latest",
     "@vue/eslint-config-prettier": "^7.1.0",
     "@vue/test-utils": "^2.3.0",
     "eslint": "^8.34.0",

@@ -15,18 +15,21 @@ module.exports = mongoose.model('User', userSchema) */
 
 /* GET conferences listing. */
 router.get('/', async function (req, res, next) {
-  console.log('before')
+  /*  const berlin = req.session.berlin || 0
+
+  req.session.berlin = berlin + 1
+
+  req.session.visits = req.session.visits || []
+
+  req.session.visits.push(`conference detail ${req.params.id}`)
+
+  console.log('fetching conferences.Number of visits', berlin) */
+
   const conferences = await Conference.find()
-  console.log('After')
-  if (req.query.view === 'json')
-    return res.send(
-      conferences.map(conference => ({
-        name: conference.name,
-        location: conference.location,
-        date: conference.date,
-        attendees: conference.attendees.map(attendee => attendee.name),
-      }))
-    )
+
+  console.log('Aftr')
+
+  return res.send(conferences)
 
   res.render('conferences', {
     conferences,
@@ -34,18 +37,22 @@ router.get('/', async function (req, res, next) {
 })
 
 /* GET conference details. */
-router.get('/:name', function (req, res, next) {
-  const conference = Conference.list.find(conference => conference.name === req.params.name)
+router.get('/:id', async function (req, res, next) {
+  /*  const berlin = req.session.berlin || 0
+
+  req.session.berlin = berlin + 1
+
+  req.session.visits = req.session.visits || []
+
+  req.session.visits.push(`conference detail ${req.params.id}`)
+
+  console.log('fetching conferences. Number of visits:', berlin, req.session.visits)*/
+
+  const conference = await Conference.findById(req.params.id)
 
   if (!conference) return res.status(404).send('Conference not found')
 
-  if (req.query.view === 'json')
-    return res.send({
-      name: conference.name,
-      location: conference.location,
-      date: conference.date,
-      attendees: conference.attendees.map(attendee => attendee.name),
-    })
+  return res.send(conference)
 
   res.render('conference-detail', {
     conference,
@@ -60,7 +67,6 @@ router.post('/', async function (req, res, next) {
 
   res.send(conference)
 })
-
 //join a conference
 router.post('/:conferenceId/attendees', async function (req, res, next) {
   const user = await User.findById(req.body.user)
@@ -74,8 +80,6 @@ router.post('/:conferenceId/attendees', async function (req, res, next) {
     name: conference.name,
   })
 })
-
-
 
 module.exports = router
 

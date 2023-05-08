@@ -1,18 +1,49 @@
-<script setup>
+<script>
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import { useSocketStore } from './stores/socket'
+import { useAccountStore } from './stores/account'
+import { mapActions, mapState } from 'pinia'
+
+import axios from 'axios'
+
+export default {
+  name: 'App',
+  components: {
+    HelloWorld,
+    RouterLink,
+    RouterView
+  },
+
+  async mounted() {
+    await this.fetchUser()
+    await this.init()
+  },
+  methods: {
+    ...mapActions(useAccountStore, ['fetchUser', 'logout']),
+    ...mapActions(useSocketStore, ['init'])
+  },
+  computed: {
+    ...mapState(useAccountStore, ['user']),
+    ...mapState(useSocketStore, ['connected', 'time'])
+  }
+}
 </script>
 
 <template>
   <header>
-    <!--div class="wrapper">
+    <div class="wrapper">
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
+        <RouterLink v-if="!user" to="/signup">Sign up</RouterLink>
+        <RouterLink v-if="!isLoggedIn" to="/login">Log in</RouterLink>
+        <RouterLink v-if="user" @click="logout" to="/login">Log out</RouterLink>
       </nav>
-    </div> -->
+    </div>
   </header>
-  <h1>The Platform</h1>
+  <h1>The Platform for {{ user?.name }}. Socket connected: {{ connected ? 'yes' : 'no' }}</h1>
+  <p>{{ time }}</p>
   <suspense>
     <RouterView />
   </suspense>

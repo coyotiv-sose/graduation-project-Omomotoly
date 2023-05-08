@@ -1,23 +1,24 @@
 <script setup>
-import WelcomeItem from './WelcomeItem.vue'
+/* import WelcomeItem from './WelcomeItem.vue'
 import DocumentationIcon from './icons/IconDocumentation.vue'
 import ToolingIcon from './icons/IconTooling.vue'
 import EcosystemIcon from './icons/IconEcosystem.vue'
 import CommunityIcon from './icons/IconCommunity.vue'
-import SupportIcon from './icons/IconSupport.vue'
+import SupportIcon from './icons/IconSupport.vue' */
 import axios from 'axios'
 
 const { data: conferences } = await axios.get('http://localhost:3000/conferences')
 </script>
 
 <template>
-  <h1>Conferences</h1>
+  <!--<h2>Logged in as:</h2> -->
+  <!-- <h1>Conferences</h1>
   <ul>
     <li v-for="conference in conferences" :key="conference.id">
       {{ conference.name }} at {{ conference.location }} on {{ conference.date }}
     </li>
-  </ul>
-  <WelcomeItem>
+  </ul> -->
+  <!-- <WelcomeItem>
     <template #icon>
       <DocumentationIcon />
     </template>
@@ -91,5 +92,25 @@ const { data: conferences } = await axios.get('http://localhost:3000/conferences
     As an independent project, Vue relies on community backing for its sustainability. You can help
     us by
     <a href="https://vuejs.org/sponsor/" target="_blank" rel="noopener">becoming a sponsor</a>.
-  </WelcomeItem>
+  </WelcomeItem> -->
 </template>
+
+<!-- <script setup>
+import axios from 'axios'
+
+axios.defaults.withCredentials = true
+
+axios.defaults.baseURL = import.meta.env.VITE_API_URL
+
+const { data: conferences } = await axios.get('/conferences')
+</script>
+
+<template>
+  <h1>Conferences</h1>
+  <ul>
+    <li v-for="conference in conferences" :key="conference.id">
+      {{ conference.name }} at {{ conference.location }} on {{ conference.date }}
+    </li>
+  </ul>
+</template>
+ -->
