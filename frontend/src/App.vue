@@ -25,7 +25,7 @@ export default {
   },
   computed: {
     ...mapState(useAccountStore, ['user']),
-    ...mapState(useSocketStore, ['connected', 'time'])
+    ...mapState(useSocketStore, ['connected'])
   }
 }
 </script>
@@ -37,13 +37,13 @@ export default {
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
         <RouterLink v-if="!user" to="/signup">Sign up</RouterLink>
-        <RouterLink v-if="!isLoggedIn" to="/login">Log in</RouterLink>
+        <RouterLink v-if="!user" to="/login">Log in</RouterLink>
         <RouterLink v-if="user" @click="logout" to="/login">Log out</RouterLink>
       </nav>
     </div>
   </header>
   <h1>The Platform for {{ user?.name }}. Socket connected: {{ connected ? 'yes' : 'no' }}</h1>
-  <p>{{ time }}</p>
+  <!--<p>{{ time }}</p> -->
   <suspense>
     <RouterView />
   </suspense>
@@ -54,6 +54,7 @@ header {
   line-height: 1.5;
   max-height: 100vh;
 }
+
 
 .logo {
   display: block;

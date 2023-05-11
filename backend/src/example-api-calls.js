@@ -28,34 +28,35 @@ console.log('The Platform is an App for Creating and Managing Events')
 
 async function main() {
   await User.deleteMany()
+  await Conference.deleteMany()
 
-  const tobi = await axios.post('http://localhost:3000/users', {
+  const tobi = await axios.post('/users', {
     name: 'Tobi',
-    email: 'tobiss@gmail.com',
+    email: 'tobi1234@gmail.com',
     password: '123456~',
   })
 
-  const kemi = await axios.post('http://localhost:3000/users', {
+  const kemi = await axios.post('/users', {
     name: 'Kemi',
-    email: 'kemi@gmail.com',
+    email: 'kemi1234@gmail.com',
     password: '123456~',
   })
 
-  /*await axios.post('http://localhost:3000/users', {
+  /*await axios.post('/users', {
     name: 'Zainab',
   })
 
-  await axios.post('http://localhost:3000/users', {
+  await axios.post('/users', {
     name: 'Omotola',
   })*/
-  const tobiGoogleConference = await axios.post('http://localhost:3000/conferences', {
+  const tobiGoogleConference = await axios.post('/conferences', {
     user: tobi.data._id,
     name: 'TobiGoogleConference',
     location: 'Whispering Palms',
     date: '12/10/2019',
   })
 
-  const kemiAnnualConference = await axios.post('http://localhost:3000/conferences', {
+  const kemiAnnualConference = await axios.post('/conferences', {
     user: kemi.data._id,
     name: 'KemiAnnualConference',
     location: 'National Park',
@@ -86,12 +87,12 @@ async function main() {
     date: '12/10/2019',
   })
  */
-  const loggedInTobi = await axios.post('/accounts/session', {
-    email: 'tobi@gmail.com',
-    password: '123456~',
-  })
+  // const loggedInTobi = await axios.post('/accounts/session', {
+  //   email: 'tobi@gmail.com',
+  //   password: '123456~',
+  // })
 
-  console.log('Tobi', loggedInTobi.data)
+  // console.log('Tobi', loggedInTobi.data)
 }
 
 main().catch(error => {

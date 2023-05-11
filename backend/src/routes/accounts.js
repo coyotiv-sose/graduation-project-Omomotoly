@@ -4,11 +4,11 @@ const User = require('../models/user')
 const passport = require('passport')
 
 router.get('/session', async function (req, res, next) {
-  res.send(req.session)
+  res.send(req.user)
 })
 
 router.post('/session', passport.authenticate('local', { failWithError: true }), function (req, res) {
-  res.redirect('/conferences')
+  res.send(req.user)
 })
 
 /* router.post('/', async function (req, res, next) {

@@ -16,7 +16,7 @@ const mongoose = require('mongoose')
 require('./database-connection')
 const passport = require('passport')
 
-//const indexRouter = require('./routes/index')
+const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
 const conferencesRouter = require('./routes/conferences')
 const accountsRouter = require('./routes/accounts')
@@ -30,6 +30,7 @@ passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
 const app = express()
+app.set('trust proxy', 1)
 
 app.use(cors({ origin: true, credentials: true }))
 
@@ -50,7 +51,9 @@ app.use(
     saveUninitialized: true,
     cookie: {
       maxAge: 1000 * 60 * 60 * 24 * 15, // 15 days
-      sameSite: 'none',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+      secure: process.env.NODE_ENV === 'production',
+      domain: process.env.NODE_ENV === 'production' ? '.herokuapp.com' : 'localhost',
     },
     store: MongoStore.create({ clientPromise, stringify: false }),
     //      mongoUrl: process.env.MONGODB_CONNECTION_STRING,
@@ -82,7 +85,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/users', usersRouter)
 app.use('/conferences', conferencesRouter)
-//app.use('/', indexRouter)
+app.use('/', indexRouter)
 app.use('/accounts', accountsRouter)
 
 // catch 404 and forward to error handler
@@ -106,15 +109,11 @@ app.use(function (err, req, res, next) {
 })
 
 app.createSocketServer = function (server) {
-  const io = require('socket.io')(server)
-  console.log('socket server created')
-
-  io.on('connection', function (socket) {
-    console.log('a user connected')
-
-    socket.on('disconnect', function () {
-      console.log('user disconnected')
-    })
+  const io = require('socket.io')(server, {
+    cors: {
+      origin: true,
+      credentials: true,
+    },
   })
 }
 
