@@ -18,6 +18,8 @@ nav.navbar.navbar-expand-lg.bg-body-tertiary
           a.nav-link.active(aria-current='page' href='#') Home
         li.nav-item
           router-link.nav-link(to="/conferences") Conferences
+        li.nav-item
+          router-link.nav-link(to="/users") Users
         li.nav-item(v-if="!user")
           router-link.nav-link(to="/login") Log in
         li.nav-item(v-if="!user")

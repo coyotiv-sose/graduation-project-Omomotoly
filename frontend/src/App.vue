@@ -4,6 +4,8 @@ import HelloWorld from './components/HelloWorld.vue'
 import { useSocketStore } from './stores/socket'
 import { useAccountStore } from './stores/account'
 import { mapActions, mapState } from 'pinia'
+import NavBar from './components/NavBar.vue'
+
 
 import axios from 'axios'
 
@@ -12,7 +14,8 @@ export default {
   components: {
     HelloWorld,
     RouterLink,
-    RouterView
+    RouterView,
+    NavBar
   },
 
   async mounted() {
@@ -30,7 +33,7 @@ export default {
 }
 </script>
 
-<template>
+<!-- <template>
   <header>
     <div class="wrapper">
       <nav>
@@ -43,13 +46,20 @@ export default {
     </div>
   </header>
   <h1>The Platform for {{ user?.name }}. Socket connected: {{ connected ? 'yes' : 'no' }}</h1>
-  <!--<p>{{ time }}</p> -->
   <suspense>
     <RouterView />
   </suspense>
+</template> -->
+
+<template>
+  <NavBar :user="user" />
+  <h1>The Platform for {{ user?.name }}</h1>
+  <Suspense>
+    <RouterView />
+  </Suspense>
 </template>
 
-<style scoped>
+<!-- <style scoped>
 header {
   line-height: 1.5;
   max-height: 100vh;
@@ -112,4 +122,4 @@ nav a:first-of-type {
     margin-top: 1rem;
   }
 }
-</style>
+</style> -->
