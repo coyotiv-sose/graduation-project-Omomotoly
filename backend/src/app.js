@@ -1,4 +1,5 @@
 require('dotenv').config()
+require('./database-connection')
 const User = require('./models/user')
 const Conference = require('./models/conference')
 const Attendee = require('./models/attendee')
@@ -13,7 +14,6 @@ const cors = require('cors')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
 const mongoose = require('mongoose')
-require('./database-connection')
 const passport = require('passport')
 
 const indexRouter = require('./routes/index')

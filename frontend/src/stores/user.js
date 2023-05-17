@@ -1,11 +1,11 @@
-import { ref, computed } from 'vue'
-import { defineStore } from 'pinia'
-import axios from 'axios'
+//import { ref, computed } from 'vue'
+//import { defineStore } from 'pinia'
+//import axios from 'axios'
 
-axios.defaults.withCredentials = true
-axios.defaults.baseURL = import.meta.env.VITE_API_URL
+// axios.defaults.withCredentials = true
+//axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
-export const useUserStore = defineStore('User', {
+/* export const useUserStore = defineStore('User', {
   state: () => ({
     user: null
   }),
@@ -19,4 +19,4 @@ export const useUserStore = defineStore('User', {
       this.$router.push('/login')
     }
   }
-})
+}) */

@@ -6,6 +6,7 @@ import axios from 'axios'
 export default {
   data() {
     return {
+      name: '',
       email: '',
       password: ''
     }
@@ -13,11 +14,14 @@ export default {
   methods: {
     async signup() {
       try {
-        const response = await axios.post('/accounts/signup', {
+        const response = await axios.post('/users', {
+          name: this.name,
           email: this.email,
           password: this.password
         })
         console.log('User signed up:', response.data)
+      this.$router.push('/login')
+
         // do something with the response, such as redirect to the login page
       } catch (error) {
         console.error('Error signing up:', error)
@@ -48,7 +52,7 @@ export default {
 <template lang="pug">
 .container
   h2 Sign up for an account
-  form(@submit.prevent="doSignup")
+  form(@submit.prevent="signup")
     div#nameInput
       label.form-label(for="name") Name:
       input.form-control#name(v-model="name" type="text" required)
