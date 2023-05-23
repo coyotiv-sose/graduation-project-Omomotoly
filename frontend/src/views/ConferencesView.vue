@@ -1,16 +1,22 @@
-<script setup>
+<script>
 import axios from 'axios'
-import ExampleVue from '../components/ExampleVue.vue'
-
 import { RouterLink } from 'vue-router'
+axios.defaults.withCredentials = true
+axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
-import Counter from '../components/Counter.vue'
+export default {
+  name: 'ConferencesView',
+  data() {
+    return {
+      conferences: []
+    }
+  },
+  async created () {
+    const { data: conferences } = await axios.get('/conferences')
+    this.conferences = conferences
+  }
+}
 
-import CounterOptions from '../components/CounterOptions.vue'
-import User from '../components/User.vue'
-
-const { data: conferences } = await axios.get('http://localhost:3000/conferences')
-console.log(conferences)
 </script>
 
 <template lang="pug">

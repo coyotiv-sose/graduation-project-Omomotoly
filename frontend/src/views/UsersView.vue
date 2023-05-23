@@ -3,7 +3,7 @@ import axios from 'axios'
 import { RouterLink } from 'vue-router'
 import User from '../components/User.vue'
 
-const { data: users } = await axios.get('http://localhost:3000/users')
+const { data: users } = await axios.get('/users')
 console.log(users)
 </script>
 

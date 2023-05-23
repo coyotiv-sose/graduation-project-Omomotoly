@@ -1,7 +1,7 @@
 const User = require('./models/user')
 const Conference = require('./models/conference')
 const axios = require('axios')
-axios.defaults.baseURL = 'http://localhost:3000'
+axios.defaults.baseURL = ''
 require('dotenv').config()
 require('./database-connection')
 
@@ -20,15 +20,15 @@ console.log('The Platform is an App for Creating and Managing Events')
 
 //fetch users with axios
 
-/* axios.get('http://localhost:3000/users').then(response => {
+/* axios.get('/users').then(response => {
   console.log(response.data)
 }) */
 
 // create a user with axios
 
 async function main() {
-  await User.deleteMany()
-  await Conference.deleteMany()
+  // await User.deleteMany()
+  // await Conference.deleteMany()
 
   const tobi = await axios.post('/users', {
     name: 'Tobi',
@@ -73,20 +73,20 @@ async function main() {
   const allUsers = await axios.get('/users')
   console.log('List of all users', allUsers.data)
 
-  /* const tobi = await axios.post('/users', {
+  const tobiSurname = await axios.post('/users', {
     name: 'Tobi',
     email: 'tobi@gmail.com',
     password: '123456~',
   })
 
-  const tobiGoogleConference = await axios.post('/conferences', {
+  const tobiWindowsConference = await axios.post('/conferences', {
     user: tobi.data._id,
 
     name: 'TobiGoogleConference',
     location: 'Whispering Palms',
     date: '12/10/2019',
   })
- */
+
   // const loggedInTobi = await axios.post('/accounts/session', {
   //   email: 'tobi@gmail.com',
   //   password: '123456~',
