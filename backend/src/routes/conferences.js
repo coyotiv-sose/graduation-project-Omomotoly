@@ -69,16 +69,15 @@ router.post('/', async function (req, res, next) {
 })
 //join a conference
 router.post('/:conferenceId/attendees', async function (req, res, next) {
-  const user = await User.findById(req.body.user)
+  // const user = await User.findById(req.body.user)
 
-  console.log('user', req.body.user, req.params.conferenceId)
+  //console.log('user', req.body.user, req.params.conferenceId)
   const conference = await Conference.findById(req.params.conferenceId)
 
-  await user.joinConference(conference)
+  await req.user.joinConference(conference)
+  const updatedConference = await Conference.findById(req.params.conferenceId)
 
-  res.send({
-    name: conference.name,
-  })
+  res.send(updatedConference)
 })
 
 module.exports = router

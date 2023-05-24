@@ -16,6 +16,12 @@ router.post('/', async function (req, res, next) {
   res.send(user)
 })
 
+/*get a user by id*/
+router.get('/:userId', async function (req, res, next) {
+  const user = await User.findById(req.params.userId).populate('conferences')
+  res.send(user)
+})
+
 /*create a conference for a user*/
 /*router.post('/:userId/conferences', function (req, res, next) {
   const user = User.list.find(user => user.name === req.params.userId)
