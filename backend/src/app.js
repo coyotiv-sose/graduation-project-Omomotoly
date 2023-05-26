@@ -51,11 +51,12 @@ app.use(
     saveUninitialized: true,
     cookie: {
       maxAge: 1000 * 60 * 60 * 24 * 15, // 15 days
-      // sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
-      sameSite: 'lax',
+       sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      //sameSite: 'lax',
       secure: process.env.NODE_ENV === 'production',
-      domain: process.env.NODE_ENV === 'production' ? '.herokuapp.com' : 'localhost',
-    },
+      //domain: process.env.NODE_ENV === 'production' ? '.herokuapp.com' : 'localhost',
+      domain: process.env.COOKIE_DOMAIN,
+      },
     store: MongoStore.create({ clientPromise, stringify: false }),
     //      mongoUrl: process.env.MONGODB_CONNECTION_STRING,
     //ttl: 60 * 60 * 24 * 15, // 15 days
