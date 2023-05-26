@@ -6,7 +6,6 @@ import { useAccountStore } from './stores/account'
 import { mapActions, mapState } from 'pinia'
 import NavBar from './components/NavBar.vue'
 
-
 import axios from 'axios'
 
 export default {
@@ -53,7 +52,7 @@ export default {
 
 <template>
   <NavBar :user="user" />
-  <h1>The Platform for {{ user?.name }}</h1>
+  <!--<h1>The Platform for {{ user?.name }}</h1>-->
   <Suspense>
     <RouterView />
   </Suspense>
